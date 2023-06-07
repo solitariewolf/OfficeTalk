@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>OfficeTalk - Login</title>
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self'; script-src 'self'; style-src 'self'">
     <link rel="icon" href="favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="styles.css">
     <script src="scripts.js" defer></script>
@@ -11,7 +12,7 @@
 <body>
     <div class="login-container">
         <img src="logo.png" alt="OfficeTalk Logo" width="300" height="125">
-        <form id="login-form" action="/login" method="post">
+        <form id="login-form" action="login.php" method="post">
             <label for="email">E-mail:</label>
             <input type="email" id="email" name="email" required>
             
