@@ -1,0 +1,83 @@
+/* styles.css */
+
+body, html {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: #6c87ff;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 100vh;
+  overflow: hidden;
+}
+
+/* Estilo do container principal */
+.login-container {
+  max-width: 400px;
+  margin: auto;
+  padding: 40px;
+  background-color: #f0f8ff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Estilo da imagem do logotipo */
+.login-container img {
+  display: block;
+  margin: 0 auto 20px;
+}
+
+/* Estilo do formulário */
+#login-form {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Estilo das caixas de input */
+input[type="email"],
+input[type="password"] {
+  padding: 10px;
+  margin-bottom: 20px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+}
+
+/* Estilo do botão de login */
+button[type="submit"] {
+  padding: 10px;
+  background-color: #3498db;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+/* Estilo do botão de login ao passar o mouse */
+button[type="submit"]:hover {
+  background-color: #2980b9;
+}
+
+.footer {
+  text-align: center;
+  padding: 20px;
+}
+
+.footer p {
+  margin: 5px;
+}
+
+.footer a {
+  color: #17e428;
+  text-decoration: none;
+}
+
+.footer a:hover {
+  text-decoration: underline;
+}

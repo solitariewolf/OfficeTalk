@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OfficeTalk - Login</title>
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="styles.css">
+    <script src="scripts.js" defer></script>
+</head>
+<body>
+    <div class="login-container">
+        <img src="logo.png" alt="OfficeTalk Logo" width="300" height="125">
+        <form id="login-form" action="/login" method="post">
+            <label for="email">E-mail:</label>
+            <input type="email" id="email" name="email" required>
+            
+            <label for="password">Senha:</label>
+            <input type="password" id="password" name="password" required>
+            
+            <button type="submit">Login</button>
+            
+            <a href="/recover-password">Recuperar Senha</a>
+        </form>
+    </div>
+
+    <footer class="footer">
+        <p>&copy; 2023 SolitarieWolf. Todos os direitos reservados.</p>
+        <p>Desenvolvido por <a href="https://github.com/solitariewolf" target="_blank">SolitarieWolf</a></p>
+        <!-- We kindly request not to remove the footer!!! -->
+    </footer>
+</body>
+</html>
