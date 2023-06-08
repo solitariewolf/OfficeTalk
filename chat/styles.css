@@ -1,0 +1,218 @@
+/* Estilos para o cabeçalho */
+.header {
+    background-color: #f2f2f2;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.logo {
+    margin-right: auto;
+}
+
+.menu ul {
+    list-style-type: none;
+    display: flex;
+}
+
+.menu ul li {
+    margin-right: 10px;
+}
+
+.menu ul li a {
+    text-decoration: none;
+    color: #333;
+}
+
+/* Estilos para o container do chat */
+.chat-container {
+    display: flex;
+}
+
+/* Estilos para a barra lateral de usuários do chat */
+.sidebar {
+    flex: 0 0 200px;
+    background-color: #f2f2f2;
+    padding: 10px;
+}
+
+.sidebar h2 {
+    margin-top: 0;
+}
+
+.user-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.user-list li {
+    margin-bottom: 5px;
+    background-color: #f2f2f2;
+    padding: 5px;
+    border: 1px solid #ccc;
+    transition: background-color 0.3s ease;
+    border-radius: 5px;
+}
+
+.user-list li:hover {
+    background-color: #ddd;
+}
+
+/* Estilos para a área de chat */
+.chat {
+    flex: 1;
+    padding: 10px;
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+}
+
+.chat-history {
+    flex: 1;
+    overflow-y: scroll;
+    margin-bottom: 10px;
+}
+
+.message {
+    margin-bottom: 5px;
+}
+
+.username {
+    font-weight: bold;
+}
+
+.chat-input {
+    display: flex;
+}
+
+textarea#message-input {
+    flex: 1;
+    resize: none;
+}
+
+.buttons {
+    display: flex;
+    align-items: center;
+    margin-left: 10px;
+}
+
+.buttons button {
+    margin-left: 5px;
+}
+
+/* Estilos para a área de mensagens privadas */
+.private-messages {
+    flex: 0 0 200px;
+    background-color: #f2f2f2;
+    padding: 10px;
+}
+
+.private-messages h2 {
+    margin-top: 0;
+}
+
+.private-messages-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.private-messages-list li {
+    margin-bottom: 5px;
+    background-color: #f2f2f2;
+    padding: 5px;
+    border: 1px solid #ccc;
+    transition: background-color 0.3s ease;
+    border-radius: 5px;
+}
+
+.private-messages-list li:hover {
+    background-color: #ddd;
+}
+
+/* Estilos para o rodapé */
+.footer {
+    background-color: #f2f2f2;
+    padding: 10px;
+    text-align: center;
+}
+/* Estilos para os botões do menu superior */
+.menu ul li a {
+    display: inline-block;
+    padding: 10px;
+    border: 1px solid #ccc;
+    background-color: #f2f2f2;
+    color: #333;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+    border-radius: 5px;
+}
+
+/* Cores dos status dos usuários */
+.status-online {
+    background-color: #44bd32;
+}
+
+.status-ausente {
+    background-color: #ffa500;
+}
+
+.status-offline {
+    background-color: #e74c3c;
+}
+
+/* Estilos para a barra lateral de usuários do chat */
+.sidebar {
+    flex: 0 0 200px;
+    background-color: #f2f2f2;
+    padding: 10px;
+}
+
+.sidebar h2 {
+    margin-top: 0;
+}
+
+.user-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.user-list li {
+    margin-bottom: 5px;
+    padding: 5px;
+    border: 1px solid #ccc;
+    transition: background-color 0.3s ease;
+    border-radius: 5px;
+    display: flex; /* Adição: Exibir como flexbox */
+    align-items: center; /* Adição: Centralizar verticalmente */
+}
+
+.user-list li:before {
+    content: "";
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    margin-right: 5px; /* Adição: Espaçamento entre a bolinha e o nome */
+}
+
+.user-list li .username {
+    flex: 1; /* Adição: Ocupar o espaço restante */
+}
+
+.user-list li.status-online:before {
+    background-color: #44bd32;
+}
+
+.user-list li.status-ausente:before {
+    background-color: #ffa500;
+}
+
+.user-list li.status-offline:before {
+    background-color: #463e3d;
+}
+
+.user-list li:hover {
+    background-color: #ddd;
+}

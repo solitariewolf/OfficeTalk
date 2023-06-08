@@ -10,7 +10,6 @@ body, html {
 
 body {
   background-color: #6c87ff;
-  padding: 20px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;

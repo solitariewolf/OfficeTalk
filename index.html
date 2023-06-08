@@ -7,17 +7,18 @@
     <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self'; script-src 'self'; style-src 'self'">
     <link rel="icon" href="favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="styles.css">
-    <script src="scripts.js" defer></script>
 </head>
 <body>
     <div class="login-container">
         <img src="logo.png" alt="OfficeTalk Logo" width="300" height="125">
-        <form id="login-form" action="login.php" method="post">
+        <form id="login-form" method="post">
             <label for="email">E-mail:</label>
             <input type="email" id="email" name="email" required>
             
             <label for="password">Senha:</label>
             <input type="password" id="password" name="password" required>
+
+            <div id="error-message" class="error-message"></div>
             
             <button type="submit">Login</button>
             
@@ -30,5 +31,7 @@
         <p>Desenvolvido por <a href="https://github.com/solitariewolf" target="_blank">SolitarieWolf</a></p>
         <!-- We kindly request not to remove the footer!!! -->
     </footer>
+
+    <script src="scripts.js" defer></script>
 </body>
 </html>

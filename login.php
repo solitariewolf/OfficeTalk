@@ -5,6 +5,10 @@ $username = "root";        // Nome de usuário do MySQL
 $password = "";            // Senha do MySQL
 $database = "talk";       // Nome do banco de dados
 
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
 // Cria a conexão com o banco de dados
 $conn = new mysqli($servername, $username, $password, $database);
 
@@ -40,15 +44,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $_SESSION['userid'] = $user['id'];
             $_SESSION['email'] = $email;
 
-            // Redirecionar para a página inicial
-            header("location: index.php");
+            // Atualizar o status do usuário para "online"
+            $updateStmt = $conn->prepare("UPDATE users SET status = 'online' WHERE id = ?");
+            $updateStmt->bind_param("i", $user['id']);
+            $updateStmt->execute();
+
+            // Retornar uma resposta JSON de sucesso
+            echo json_encode(array("success" => true));
         } else {
-            // A senha está incorreta. Mostrar uma mensagem de erro.
-            echo "Senha incorreta!";
+            // A senha está incorreta. Retornar uma mensagem de erro.
+            echo json_encode(array("success" => false, "message" => "Senha incorreta!"));
         }
     } else {
-        // O usuário não existe. Mostrar uma mensagem de erro.
-        echo "Usuário não encontrado!";
+        // O usuário não existe. Retornar uma mensagem de erro.
+        echo json_encode(array("success" => false, "message" => "Usuário não encontrado!"));
     }
 
     // Fechar a consulta

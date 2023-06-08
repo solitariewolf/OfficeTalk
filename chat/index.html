@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OfficeTalk - Chat</title>
+    <link rel="icon" href="../favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="styles.css">
+    <script src="scripts.js" defer></script>
+    <script src="https://unpkg.com/twemoji@14.0.2/dist/twemoji.min.js"></script>
+</head>
+<body>
+    <header class="header">
+        <div class="logo">
+            <img src="../logo.png" alt="OfficeTalk Logo" width="150" height="62">
+        </div>
+        <nav class="menu">
+            <ul>
+                <li><a href="#">Meu Perfil</a></li>
+                <li><a href="#">Configurações</a></li>
+                <li><a href="#">Menu 1</a></li>
+                <li><a href="#">Menu 2</a></li>
+                <li><a href="#" id="logout-button">Sair</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="chat-container">
+        <div class="sidebar">
+            <h2>Usuários</h2>
+            <ul class="user-list"></ul>
+        </div>
+        <div class="chat">
+            <div class="chat-history">
+                <!-- Histórico de mensagens -->
+                <div class="message">
+                    <span class="username">Usuário 1:</span>
+                    <span class="text">Olá, tudo bem?</span>
+                </div>
+                <div class="message">
+                    <span class="username">Usuário 2:</span>
+                    <span class="text">Sim, e com você?</span>
+                </div>
+                <!-- Adicione mais mensagens conforme necessário -->
+            </div>
+            <div class="chat-input">
+                <textarea id="message-input" placeholder="Digite sua mensagem..."></textarea>
+                <div class="buttons">
+                    <button id="send-button">Enviar</button>
+                    <button id="emoji-button" data-emojiable="true">😊</button>
+                </div>
+            </div>
+        </div>
+        <div class="private-messages">
+            <h2>Histórico</h2>
+            <ul class="private-messages-list">
+                <!-- Histórico de mensagens privadas -->
+                <li>Conversa Privada 1</li>
+                <li>Conversa Privada 2</li>
+                <li>Conversa Privada 3</li>
+                <!-- Adicione mais conversas privadas conforme necessário -->
+            </ul>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <p>&copy; 2023 SolitarieWolf. Todos os direitos reservados.</p>
+        <p>Desenvolvido por <a href="https://github.com/solitariewolf" target="_blank">SolitarieWolf</a></p>
+        <!-- We kindly request not to remove the footer!!! -->
+    </footer>
+    <script src="https://unpkg.com/twemoji@14.0.2/dist/twemoji.min.js"></script>
+    <script>
+    // Função para carregar a lista de usuários do arquivo users.php
+    function loadUserList() {
+        var userListElement = document.querySelector('.user-list');
+
+        // Fazer uma requisição AJAX para obter a lista de usuários
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', 'users.php', true);
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                // A requisição foi bem sucedida. Atualizar a lista de usuários.
+                userListElement.innerHTML = xhr.responseText;
+            }
+        };
+        xhr.send();
+    }
+
+    // Chamar a função para carregar a lista de usuários ao carregar a página
+    document.addEventListener('DOMContentLoaded', loadUserList);
+    </script>
+</body>
+</html>
