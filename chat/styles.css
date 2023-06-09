@@ -66,11 +66,12 @@
     background-color: #fff;
     display: flex;
     flex-direction: column;
+    height: 700px;
 }
 
 .chat-history {
     flex: 1;
-    overflow-y: scroll;
+    overflow-y: auto;
     margin-bottom: 10px;
 }
 
@@ -101,7 +102,7 @@ textarea#message-input {
     margin-left: 5px;
 }
 
-/* Estilos para a área de mensagens privadas */
+/* Estilos para a área de histórico */
 .private-messages {
     flex: 0 0 200px;
     background-color: #f2f2f2;

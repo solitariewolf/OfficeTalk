@@ -6,8 +6,7 @@
     <title>OfficeTalk - Chat</title>
     <link rel="icon" href="../favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="styles.css">
-    <script src="scripts.js" defer></script>
-    <script src="https://unpkg.com/twemoji@14.0.2/dist/twemoji.min.js"></script>
+    <script src="script.js" defer></script>
 </head>
 <body>
     <header class="header">
@@ -33,15 +32,6 @@
         <div class="chat">
             <div class="chat-history">
                 <!-- Histórico de mensagens -->
-                <div class="message">
-                    <span class="username">Usuário 1:</span>
-                    <span class="text">Olá, tudo bem?</span>
-                </div>
-                <div class="message">
-                    <span class="username">Usuário 2:</span>
-                    <span class="text">Sim, e com você?</span>
-                </div>
-                <!-- Adicione mais mensagens conforme necessário -->
             </div>
             <div class="chat-input">
                 <textarea id="message-input" placeholder="Digite sua mensagem..."></textarea>
@@ -55,7 +45,7 @@
             <h2>Histórico</h2>
             <ul class="private-messages-list">
                 <!-- Histórico de mensagens privadas -->
-                <li>Conversa Privada 1</li>
+                <li>Geral</li>
                 <li>Conversa Privada 2</li>
                 <li>Conversa Privada 3</li>
                 <!-- Adicione mais conversas privadas conforme necessário -->
@@ -68,26 +58,5 @@
         <p>Desenvolvido por <a href="https://github.com/solitariewolf" target="_blank">SolitarieWolf</a></p>
         <!-- We kindly request not to remove the footer!!! -->
     </footer>
-    <script src="https://unpkg.com/twemoji@14.0.2/dist/twemoji.min.js"></script>
-    <script>
-    // Função para carregar a lista de usuários do arquivo users.php
-    function loadUserList() {
-        var userListElement = document.querySelector('.user-list');
-
-        // Fazer uma requisição AJAX para obter a lista de usuários
-        var xhr = new XMLHttpRequest();
-        xhr.open('GET', 'users.php', true);
-        xhr.onreadystatechange = function() {
-            if (xhr.readyState === 4 && xhr.status === 200) {
-                // A requisição foi bem sucedida. Atualizar a lista de usuários.
-                userListElement.innerHTML = xhr.responseText;
-            }
-        };
-        xhr.send();
-    }
-
-    // Chamar a função para carregar a lista de usuários ao carregar a página
-    document.addEventListener('DOMContentLoaded', loadUserList);
-    </script>
 </body>
 </html>
