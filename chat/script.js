@@ -37,13 +37,14 @@ function loadUserList() {
 // Chamar a função para carregar a lista de usuários ao carregar a página
 document.addEventListener('DOMContentLoaded', loadUserList);
 
+// Função para enviar mensagens
 function sendMessage() {
     var messageInput = document.getElementById('message-input');
     var message = messageInput.value.trim();
-    
+
     if (message !== '') {
         var xhr = new XMLHttpRequest();
-        xhr.open('POST', 'send.php', true); // atualizado para 'send.php'
+        xhr.open('POST', 'send.php', true);
         xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
         xhr.onreadystatechange = function() {
             if (xhr.readyState === 4 && xhr.status === 200) {
@@ -54,14 +55,18 @@ function sendMessage() {
         
         var params = 'message=' + encodeURIComponent(message);
         xhr.send(params);
+    } else {
+        console.log("A mensagem não pode ser vazia");
     }
 }
 
+// Função para carregar o histórico do chat
 function loadChatHistory() {
     var chatHistoryElement = document.querySelector('.chat-history');
-    
+    var loadMoreButton = document.getElementById('load-more-button');
+
     var xhr = new XMLHttpRequest();
-    xhr.open('GET', 'history.php', true); // atualizado para 'history.php'
+    xhr.open('GET', 'history.php', true);
     xhr.onreadystatechange = function() {
         if (xhr.readyState === 4 && xhr.status === 200) {
             var messages = JSON.parse(xhr.responseText);
@@ -69,10 +74,49 @@ function loadChatHistory() {
             messages.forEach(function(message) {
                 html += '<div class="message"><strong>' + message.username + '</strong>: ' + message.message + '</div>';
             });
-            chatHistoryElement.innerHTML = html;
+
+            // Adicionar as novas mensagens após o botão "Carregar mais"
+            loadMoreButton.insertAdjacentHTML('afterend', html);
+        } else {
+            console.log("Não foi possível carregar o histórico do chat");
         }
     };
     xhr.send();
+}
+
+setInterval(loadChatHistory, 2000);
+
+// Vincular a função sendMessage ao botão "Enviar"
+var sendButton = document.getElementById('send-button');
+if (sendButton) {
+    sendButton.addEventListener('click', sendMessage);
+} else {
+    console.error('Botão "Enviar" não encontrado');
+}
+
+// Permitir o envio de mensagem com a tecla Enter
+var messageInput = document.getElementById('message-input');
+if (messageInput) {
+    messageInput.addEventListener('keypress', function (event) {
+        if (event.key === 'Enter') {
+            sendMessage();
+            event.preventDefault(); // Impede a criação de uma nova linha no textarea
+        }
+    });
+} else {
+    console.error('Campo de entrada de mensagem não encontrado');
+}
+
+// Botão "Carregar mais"
+var loadMoreButton = document.getElementById('load-more-button');
+if (loadMoreButton) {
+    var currentPage = 1;
+    loadMoreButton.addEventListener('click', function() {
+        currentPage++;
+        loadChatHistory(currentPage);
+    });
+} else {
+    console.error('Botão "Carregar mais" não encontrado');
 }
 
 setInterval(loadChatHistory, 2000);

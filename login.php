@@ -43,6 +43,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $_SESSION['loggedin'] = true;
             $_SESSION['userid'] = $user['id'];
             $_SESSION['email'] = $email;
+            $_SESSION['username'] = $user['user'];
 
             // Atualizar o status do usuário para "online"
             $updateStmt = $conn->prepare("UPDATE users SET status = 'online' WHERE id = ?");
