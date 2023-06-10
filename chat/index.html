@@ -9,13 +9,37 @@
     <script src="script.js" defer></script>
 </head>
 <body>
+
+    <!-- Caixa de perfil -->
+    <div id="profile-modal" class="profile-modal hidden">
+        <div class="profile-modal-content">
+            <h3>Alterar Perfil</h3>
+            <form id="profile-form">
+                <label for="email">E-mail:</label>
+                <input type="email" id="email" name="email">
+    
+                <label for="username">Nome de usuário:</label>
+                <input type="text" id="username" name="username">
+    
+                <label for="password">Alterar Senha:</label>
+                <input type="password" id="password" name="password">
+    
+                <div class="profile-modal-buttons">
+                    <button type="button" id="cancel-button" class="cancel-button">Cancelar</button>
+                    <button type="submit" class="save-button">Salvar Alterações</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Cabeçalho -->
     <header class="header">
         <div class="logo">
             <img src="../logo.png" alt="OfficeTalk Logo" width="150" height="62">
         </div>
         <nav class="menu">
             <ul>
-                <li><a href="#">Meu Perfil</a></li>
+                <li><a href="#" id="profile-link">Meu Perfil</a></li>
                 <li><a href="#">Configurações</a></li>
                 <li><a href="#">Menu 1</a></li>
                 <li><a href="#">Menu 2</a></li>
@@ -58,5 +82,15 @@
         <p>Desenvolvido por <a href="https://github.com/solitariewolf" target="_blank">SolitarieWolf</a></p>
         <!-- We kindly request not to remove the footer!!! -->
     </footer>
+
+    <script>
+        document.getElementById("profile-link").addEventListener("click", function() {
+            document.getElementById("profile-modal").classList.toggle("hidden");
+        });
+        document.getElementById("cancel-button").addEventListener("click", function() {
+            document.getElementById("profile-modal").classList.add("hidden");
+        });
+    </script>
+
 </body>
 </html>

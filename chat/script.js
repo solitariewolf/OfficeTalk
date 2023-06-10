@@ -132,3 +132,76 @@ document.addEventListener('DOMContentLoaded', function() {
     loadUserList();
     loadChatHistory(true);
 });
+
+//função para atualizar o perfil
+
+document.addEventListener("DOMContentLoaded", function () {
+    const profileForm = document.getElementById("profile-form");
+    const profileModal = document.getElementById("profile-modal");
+
+    if (profileForm) {
+        profileForm.addEventListener("submit", function (event) {
+            event.preventDefault();
+            const formData = new FormData(profileForm);
+
+            fetch('update_profile.php', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert(data.message);
+                    profileModal.classList.add("hidden");
+                } else {
+                    alert(data.message);
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        });
+    }
+
+    const cancelButton = document.getElementById("cancel-button");
+    if (cancelButton) {
+        cancelButton.addEventListener("click", function () {
+            profileModal.classList.add("hidden");
+        });
+    }
+
+    const profileLink = document.getElementById("profile-link");
+    if (profileLink) {
+        profileLink.addEventListener("click", function (event) {
+            event.preventDefault();
+            profileModal.classList.remove("hidden");
+        });
+    }
+});
+
+// preencher automaticamente os dados do formulario de perfil
+
+const profileLink = document.getElementById("profile-link");
+if (profileLink) {
+    profileLink.addEventListener("click", function (event) {
+        event.preventDefault();
+        
+        // Fetch the current user data
+        fetch('get_profile.php')
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                document.getElementById("email").value = data.email;
+                document.getElementById("username").value = data.username;
+            } else {
+                alert(data.message);
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+
+        // Show the profile modal
+        profileModal.classList.remove("hidden");
+    });
+}
