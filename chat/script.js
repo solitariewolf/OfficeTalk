@@ -2,6 +2,9 @@
 const logoutButton = document.getElementById('logout-button');
 logoutButton.addEventListener('click', logout);
 
+let currentOffset = 0;
+let reachedTop = false;
+
 // Função para fazer o logout
 function logout() {
     // Realizar uma requisição para logout.php
@@ -25,7 +28,7 @@ function loadUserList() {
     // Fazer uma requisição AJAX para obter a lista de usuários
     var xhr = new XMLHttpRequest();
     xhr.open('GET', 'users.php', true);
-    xhr.onreadystatechange = function() {
+    xhr.onreadystatechange = function () {
         if (xhr.readyState === 4 && xhr.status === 200) {
             // A requisição foi bem sucedida. Atualizar a lista de usuários.
             userListElement.innerHTML = xhr.responseText;
@@ -46,13 +49,13 @@ function sendMessage() {
         var xhr = new XMLHttpRequest();
         xhr.open('POST', 'send.php', true);
         xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-        xhr.onreadystatechange = function() {
+        xhr.onreadystatechange = function () {
             if (xhr.readyState === 4 && xhr.status === 200) {
                 messageInput.value = '';
-                loadChatHistory();
+                loadChatHistory(true); // Chame com true para rolar para a mensagem mais recente
             }
         };
-        
+
         var params = 'message=' + encodeURIComponent(message);
         xhr.send(params);
     } else {
@@ -60,24 +63,36 @@ function sendMessage() {
     }
 }
 
+
 // Função para carregar o histórico do chat
-function loadChatHistory() {
+function loadChatHistory(scrollToBottom = false) {
+    if (reachedTop && !scrollToBottom) return;
+
     var chatHistoryElement = document.querySelector('.chat-history');
 
     var xhr = new XMLHttpRequest();
-    xhr.open('GET', 'history.php', true);
-    xhr.onreadystatechange = function() {
+    xhr.open('GET', `history.php?offset=${currentOffset}`, true);
+    xhr.onreadystatechange = function () {
         if (xhr.readyState === 4 && xhr.status === 200) {
             var messages = JSON.parse(xhr.responseText);
+            if (messages.length === 0 && !scrollToBottom) {
+                reachedTop = true;
+                return;
+            }
+
             var html = '';
-            messages.forEach(function(message) {
-                var messageDate = new Date(message.timestamp).toLocaleString(); // Converte o timestamp para uma string de data/hora local
+            messages.reverse().forEach(function (message) {
+                var messageDate = new Date(message.timestamp).toLocaleString();
                 html += '<div class="message"><strong>' + message.username + '</strong>: ' + message.message + '<br><span class="message-date">' + messageDate + '</span></div>';
             });
-            chatHistoryElement.innerHTML = html;
-            
-            // Scroll para o final do chat
-            chatHistoryElement.scrollTop = chatHistoryElement.scrollHeight;
+
+            chatHistoryElement.innerHTML = html + chatHistoryElement.innerHTML;
+            currentOffset += messages.length;
+
+            if (scrollToBottom) {
+                // Scroll para o final do chat
+                chatHistoryElement.scrollTop = chatHistoryElement.scrollHeight;
+            }
         } else {
             console.log("Não foi possível carregar o histórico do chat");
         }
@@ -86,7 +101,11 @@ function loadChatHistory() {
 }
 
 
-setInterval(loadChatHistory, 2000);
+document.querySelector('.chat-history').addEventListener('scroll', function (event) {
+    if (event.target.scrollTop === 0) {
+        loadChatHistory();
+    }
+});
 
 // Vincular a função sendMessage ao botão "Enviar"
 var sendButton = document.getElementById('send-button');
@@ -108,3 +127,8 @@ if (messageInput) {
 } else {
     console.error('Campo de entrada de mensagem não encontrado');
 }
+// Chamar a função para carregar a lista de usuários ao carregar a página
+document.addEventListener('DOMContentLoaded', function() {
+    loadUserList();
+    loadChatHistory(true);
+});
