@@ -71,7 +71,8 @@ function loadChatHistory() {
             var messages = JSON.parse(xhr.responseText);
             var html = '';
             messages.forEach(function(message) {
-                html += '<div class="message"><strong>' + message.username + '</strong>: ' + message.message + '</div>';
+                var messageDate = new Date(message.timestamp).toLocaleString(); // Converte o timestamp para uma string de data/hora local
+                html += '<div class="message"><strong>' + message.username + '</strong>: ' + message.message + '<br><span class="message-date">' + messageDate + '</span></div>';
             });
             chatHistoryElement.innerHTML = html;
             
@@ -83,6 +84,7 @@ function loadChatHistory() {
     };
     xhr.send();
 }
+
 
 setInterval(loadChatHistory, 2000);
 
