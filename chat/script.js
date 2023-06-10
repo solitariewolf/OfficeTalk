@@ -63,7 +63,6 @@ function sendMessage() {
 // Função para carregar o histórico do chat
 function loadChatHistory() {
     var chatHistoryElement = document.querySelector('.chat-history');
-    var loadMoreButton = document.getElementById('load-more-button');
 
     var xhr = new XMLHttpRequest();
     xhr.open('GET', 'history.php', true);
@@ -74,9 +73,10 @@ function loadChatHistory() {
             messages.forEach(function(message) {
                 html += '<div class="message"><strong>' + message.username + '</strong>: ' + message.message + '</div>';
             });
-
-            // Adicionar as novas mensagens após o botão "Carregar mais"
-            loadMoreButton.insertAdjacentHTML('afterend', html);
+            chatHistoryElement.innerHTML = html;
+            
+            // Scroll para o final do chat
+            chatHistoryElement.scrollTop = chatHistoryElement.scrollHeight;
         } else {
             console.log("Não foi possível carregar o histórico do chat");
         }
@@ -106,17 +106,3 @@ if (messageInput) {
 } else {
     console.error('Campo de entrada de mensagem não encontrado');
 }
-
-// Botão "Carregar mais"
-var loadMoreButton = document.getElementById('load-more-button');
-if (loadMoreButton) {
-    var currentPage = 1;
-    loadMoreButton.addEventListener('click', function() {
-        currentPage++;
-        loadChatHistory(currentPage);
-    });
-} else {
-    console.error('Botão "Carregar mais" não encontrado');
-}
-
-setInterval(loadChatHistory, 2000);

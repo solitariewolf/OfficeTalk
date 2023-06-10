@@ -15,7 +15,7 @@ if ($conn->connect_error) {
 }
 
 $message = $_POST['message'];
-$username = $_SESSION['username']; // Substitua isso pelo método que você usa para obter o nome de usuário logado
+$username = $_SESSION['username'];
 
 $sql = "INSERT INTO chat_history (username, message) VALUES (?, ?)";
 
