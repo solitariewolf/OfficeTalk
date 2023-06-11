@@ -32,6 +32,28 @@
         </div>
     </div>
 
+        <!-- Caixa de configurações -->
+        <div id="config-modal" class="config-modal hidden">
+            <div class="config-modal-content">
+                <h3>Configurações</h3>
+                <form id="config-form">
+                    
+                    <h>Selecionar Status:</h>
+                    <select id="status-select">
+                        <option value="online">Online</option>
+                        <option value="away">Ausente</option>
+                        <option value="offline">Offline</option>
+                      </select>
+        
+                    <div class="config-modal-buttons">
+                        <button type="button" id="cancel2-button" class="cancel2-button">Cancelar</button>
+                        <button type="submit" class="save-button">Salvar Alterações</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    
+
     <!-- Cabeçalho -->
     <header class="header">
         <div class="logo">
@@ -40,7 +62,7 @@
         <nav class="menu">
             <ul>
                 <li><a href="#" id="profile-link">Meu Perfil</a></li>
-                <li><a href="#">Configurações</a></li>
+                <li><a href="#" id="config-link">Configurações</a></li>
                 <li><a href="#">Menu 1</a></li>
                 <li><a href="#">Menu 2</a></li>
                 <li><a href="#" id="logout-button">Sair</a></li>
@@ -92,5 +114,14 @@
         });
     </script>
 
+    <script>
+        document.getElementById("config-link").addEventListener("click", function() {
+            document.getElementById("config-modal").classList.toggle("hidden");
+        });
+        document.getElementById("cancel2-button").addEventListener("click", function() {
+            document.getElementById("config-modal").classList.add("hidden");
+        });
+
+    </script>
 </body>
 </html>
