@@ -205,3 +205,57 @@ if (profileLink) {
         profileModal.classList.remove("hidden");
     });
 }
+document.addEventListener("DOMContentLoaded", function () {
+    const configForm = document.getElementById("config-form");
+    const configModal = document.getElementById("config-modal");
+
+    if (configForm) {
+        configForm.addEventListener("submit", function (event) {
+            event.preventDefault();
+            const status = document.getElementById("status-select").value;
+            
+            fetch('update_status.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ status })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert(data.message);
+                    configModal.classList.add("hidden");
+                } else {
+                    alert(data.message);
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        });
+    }
+});
+document.getElementById("settings-form").addEventListener("submit", function(event) {
+    event.preventDefault();
+    
+    const status = document.getElementById("status").value;
+    
+    const xhr = new XMLHttpRequest();
+    xhr.open("POST", "update_status.php", true);
+    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    
+    xhr.onreadystatechange = function() {
+        if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
+            const response = JSON.parse(this.responseText);
+            if (response.success) {
+                alert("Status atualizado com sucesso!");
+            } else {
+                alert("Erro ao atualizar status!");
+            }
+            document.getElementById("settings-modal").classList.add("hidden");
+        }
+    };
+    
+    xhr.send("status=" + status);
+});

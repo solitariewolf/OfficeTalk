@@ -11,20 +11,20 @@
 <body>
 
     <!-- Caixa de perfil -->
-    <div id="profile-modal" class="profile-modal hidden">
-        <div class="profile-modal-content">
+    <div id="profile-modal" class="modal hidden">
+        <div class="modal-content">
             <h3>Alterar Perfil</h3>
             <form id="profile-form">
                 <label for="email">E-mail:</label>
                 <input type="email" id="email" name="email">
-    
+
                 <label for="username">Nome de usuário:</label>
                 <input type="text" id="username" name="username">
-    
+
                 <label for="password">Alterar Senha:</label>
                 <input type="password" id="password" name="password">
-    
-                <div class="profile-modal-buttons">
+
+                <div class="modal-buttons">
                     <button type="button" id="cancel-button" class="cancel-button">Cancelar</button>
                     <button type="submit" class="save-button">Salvar Alterações</button>
                 </div>
@@ -32,27 +32,24 @@
         </div>
     </div>
 
-        <!-- Caixa de configurações -->
-        <div id="config-modal" class="config-modal hidden">
-            <div class="config-modal-content">
-                <h3>Configurações</h3>
-                <form id="config-form">
-                    
-                    <h>Selecionar Status:</h>
-                    <select id="status-select">
-                        <option value="online">Online</option>
-                        <option value="away">Ausente</option>
-                        <option value="offline">Offline</option>
-                      </select>
-        
-                    <div class="config-modal-buttons">
-                        <button type="button" id="cancel2-button" class="cancel2-button">Cancelar</button>
-                        <button type="submit" class="save-button">Salvar Alterações</button>
-                    </div>
-                </form>
-            </div>
+    <div id="settings-modal" class="modal hidden">
+        <div class="modal-content">
+            <h3>Configurações</h3>
+            <form id="settings-form">
+                <label for="status">Status:</label>
+                <select name="status" id="status">
+                    <option value="online">Online</option>
+                    <option value="ausente">Ausente</option>
+                    <option value="offline">Offline</option>
+                </select>
+
+                <div class="modal-buttons">
+                    <button type="button" id="settings-cancel-button" class="cancel-button">Cancelar</button>
+                    <button type="submit" class="save-button">Salvar Alterações</button>
+                </div>
+            </form>
         </div>
-    
+    </div>
 
     <!-- Cabeçalho -->
     <header class="header">
@@ -62,7 +59,7 @@
         <nav class="menu">
             <ul>
                 <li><a href="#" id="profile-link">Meu Perfil</a></li>
-                <li><a href="#" id="config-link">Configurações</a></li>
+                <li><a href="#" id="config">Configurações</a></li>
                 <li><a href="#">Menu 1</a></li>
                 <li><a href="#">Menu 2</a></li>
                 <li><a href="#" id="logout-button">Sair</a></li>
@@ -113,15 +110,13 @@
             document.getElementById("profile-modal").classList.add("hidden");
         });
     </script>
-
     <script>
-        document.getElementById("config-link").addEventListener("click", function() {
-            document.getElementById("config-modal").classList.toggle("hidden");
+        document.getElementById("config").addEventListener("click", function() {
+            document.getElementById("settings-modal").classList.toggle("hidden");
         });
-        document.getElementById("cancel2-button").addEventListener("click", function() {
-            document.getElementById("config-modal").classList.add("hidden");
+        document.getElementById("settings-cancel-button").addEventListener("click", function() {
+            document.getElementById("settings-modal").classList.add("hidden");
         });
-
     </script>
 </body>
 </html>
